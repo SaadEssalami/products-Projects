@@ -1,0 +1,51 @@
+
+<div class="row" >
+        
+    
+    <div class="col-md-12 mt-3" align="right">
+        <button class="btn btn-success" (click)="hideForm =!hideForm" ><i class="fa fa-plus"></i></button>
+    </div>
+</div>
+
+<div class="row" *ngIf="hideForm">
+    <div class="col-md-4 mt-4 mx-auto">
+        <div class="form-group">
+            <label for="cat" class="form-label">tagName</label>
+            <input type="text" class="form-control" id="cat" name="category" placeholder="Enter category" [(ngModel)]="categoryy.categoryName" >
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-outline-success m-2" (click)="addCategory()" *ngIf="!edit" ><i class="fa fa-send m-2"></i>Submit</button>
+                <button class="btn btn-outline-warning m-2" (click)="updateCategory()" *ngIf="edit" ><i class="fa fa-pencil m-2"></i>Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!hideForm">
+    <div class="col-md-6 mx-auto">
+        <h1 class="mt-3">List of Categoryy</h1>
+        <div class="table-responsive mt-3">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Category Name </th>
+                        <th scope="col" colspan="2"> #Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let category of categorys">
+                        <td scope="row" > {{category.id}} </td>
+                        <td> {{category.categoryName}} </td>
+                        <td >
+                            <button class="btn btn-warning m-2" (click)="editCategory(category)"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-danger" (click)="removeCategory(category.id)" ><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+    </div>

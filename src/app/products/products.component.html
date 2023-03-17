@@ -1,0 +1,82 @@
+
+<div class="row" >
+        
+    
+    <div class="col-md-12 mt-3" align="right">
+        <button class="btn btn-success" (click)=" hideForm =!hideForm" ><i class="fa fa-plus"></i></button>
+    </div>
+</div>
+
+<div class="row" *ngIf="hideForm">
+    <div class="col-md-6 mx-auto mt-3">
+        <div class="form-group">
+            <label for="img" class="label-form">imageUrl</label>
+            <input type="text" class="form-control" id="img" name="imageUrl" [(ngModel)]="product.imageUrl" />
+        </div>
+        <div class="form-group">
+            <label for="pr" class="label-form">product Name</label>
+            <input type="text" class="form-control" id="pr" name="product" [(ngModel)]="product.productName" />
+        </div>
+        <div class="form-group">
+            <label for="categor" class="form-label mt-4">Category</label>
+            <select class="form-select" id="categor" [(ngModel)]="product.categoryId" >
+              <option disabled selected >--chose your category--</option>
+              <option *ngFor="let category of categorys" [ngValue]="category.id">{{category.categoryName}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="tagg" class="form-label mt-4">Tags</label>
+            <select class="form-select" id="tagg" [(ngModel)]="product.tagId">
+              <option disabled selected>--chose your tags--</option>
+              <option *ngFor="let tags of tag" [ngValue]="tags.id">{{tags.tagName}}</option>
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label for="pr" class="label-form"> Price </label>
+            <input type="number" class="form-control" id="pr" placeholder="0" name="product" [(ngModel)]="product.price" />
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-outline-success my-2" (click)="addProduct()" *ngIf="!edit"> <i class="fa fa-send m-2"></i>Save</button>
+            <button class="btn btn-outline-warning my-2" (click)=" updateProducts()" *ngIf="edit" > <i class="fa fa-pencil m-2"></i>Update</button>
+        </div>
+</div>
+</div>
+
+<div class="row" *ngIf="!hideForm">
+    <div class="col-md-8 mx-auto">
+        <h1 class="mt-3">List of Products</h1>
+        <div class="table-responsive mt-3">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Product Name </th>
+                        <th scope="col">Category Name </th>
+                        <th scope="col">Tag Name </th>
+                        <th scope="col">Price </th>
+                        <th scope="col" colspan="2"> #Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td scope="row" >{{product.id}} </td>
+                        <td> <img class="image" [src]="product.imageUrl" alt=""> </td>
+                        <td> {{product.productName}} </td>
+                        <td> {{product.category?.categoryName}} </td>
+                        <td>{{product.tag?.tagName}}</td>
+                        <td>{{product.price}}</td>
+                        <td >
+                            <button class="btn btn-warning m-2" (click)="editProducts(product)" ><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-danger" (click)="removeProduct(product.id)"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+    </div>

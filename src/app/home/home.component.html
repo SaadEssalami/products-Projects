@@ -1,0 +1,9 @@
+
+
+<div class="row">
+    <h1>List Products</h1>
+    <div class="col-md-3" *ngFor="let item of product">
+        
+        <app-card [id]="item.id" [myProduct]="item" (deleteProducts)="removeEvent($event)"   ></app-card>
+    </div>
+</div>
